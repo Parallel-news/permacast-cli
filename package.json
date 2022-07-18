@@ -1,0 +1,43 @@
+{
+  "name": "permacast-cli",
+  "version": "0.0.1",
+  "description": "CLI for Permacast V3",
+  "type": "module",
+  "main": "./src/bin/permacast-cli.js",
+  "bin": {
+    "permacast": "./src/bin/permacast-cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Parallel-News/permacast-cli.git"
+  },
+  "keywords": [
+    "permacast",
+    "CLI",
+    "podcasts",
+    "web3"
+  ],
+  "author": "charmful0x",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Parallel-News/permacast-cli/issues"
+  },
+  "homepage": "https://github.com/Parallel-News/permacast-cli#readme",
+  "dependencies": {
+    "arweave": "^1.11.4",
+    "ascii-art": "^2.8.5",
+    "axios": "^0.27.2",
+    "buffer-to-arraybuffer": "^0.0.6",
+    "chalk": "^5.0.1",
+    "cli-spinners": "^2.6.1",
+    "clui": "^0.3.6",
+    "configstore": "^6.0.0",
+    "figlet": "^1.5.2",
+    "fs": "^0.0.1-security",
+    "inquirer": "^9.0.1",
+    "redstone-smartweave": "^0.4.4",
+    "string-strip-html": "^11.0.0",
+    "xml2js": "^0.4.23",
+    "yargs": "^17.5.1"
+  }
+}

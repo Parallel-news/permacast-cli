@@ -5,15 +5,15 @@ import { hideBin } from "yargs/helpers";
 import { initer } from "./initer.js";
 import { saveKeyFile, deleteKeyfile } from "./handlers/keyfile.js";
 import { importRss } from "./handlers/rss-import.js";
+import { account } from "./handlers/account.js";
 
 const argvs = yargs(hideBin(process.argv))
   .command({
-    command: "balance <address>",
-    aliases: ["b"],
+    command: "account",
+    aliases: ["acc"],
     handler: async (argv) => {
       await initer();
-      // const balance = await balanceOf(argv.address);
-      // console.log(`balance: ${green(balance)} AR`);
+      await account();
     },
   })
   .command({

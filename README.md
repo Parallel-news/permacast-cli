@@ -39,5 +39,13 @@ permacast import-rss --pid IKsjaUBJiKNDtLPIOyobkUM6iPtTKAK2bMDBu30KdmE --rss-url
 
 To know how to retrieve your `pid` (podcast ID) from the Permacast FE, check this [image](https://github.com/Parallel-news/permacast-docs/blob/main/img/fid-pid.png).
 
+### 4- View account stats
+
+This command displays your Arweave wallet address, balance, and how many megabytes your can upload to Arweave (excluding Permacast fee multiplier)
+
+```console
+permacast account
+```
+
 ## License
 This project is licensed under the [MIT license](./LICENSE).

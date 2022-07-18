@@ -65,6 +65,7 @@ async function addShowtoState(name, desc, audio, factory, jwk) {
     Contract: factory.address,
     "App-Name": "SmartWeaveAction",
     "App-Version": "0.3.0",
+    "Permacast-Version": "amber",
     "Content-Type": "text/plain",
     Input: JSON.stringify(input),
   };
@@ -88,7 +89,7 @@ export async function importRss(argv) {
   let rssJson;
   const RSS_URL = argv.rssUrl;
   const pid = argv.pid;
-  
+
   await isValidUrl(RSS_URL);
   const userWallet = await getJwk();
   const factory = await getPodcastFactory(pid, userWallet.address);

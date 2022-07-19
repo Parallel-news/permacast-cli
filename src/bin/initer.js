@@ -1,19 +1,7 @@
 import CLI from "clui";
 const { Spinner } = CLI;
-import art from "ascii-art";
-import { yellow } from "../utils/colors.js";
-
-export async function initer() {
-  try {
-    const rendered = await art.font("PERMACAST", "doom").completed();
-    console.log(yellow(rendered));
-    console.log(`[*] developed by: PermawebDAO`);
-    console.log(`[*] github: https://github.com/parallel-news/permacast-cli`);
-    console.log(`[*] Twitter: @permacastapp \n\n`);
-  } catch (error) {
-    return;
-  }
-}
+import { yellow, cyan } from "../utils/colors.js";
+import figlet from "figlet";
 
 export const spinnerStyle = ["⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"];
 
@@ -21,4 +9,20 @@ export function spinner(message) {
   const spinner = new Spinner(message, spinnerStyle);
 
   return spinner;
+}
+
+export async function initer() {
+  figlet("PERMACAST", "Standard", function (err, data) {
+    if (err) {
+      console.log("Something went wrong...");
+      console.dir(err);
+      return;
+    }
+    console.log(yellow(data));
+    console.log(`${cyan("[*]")} developed by: PermawebDAO`);
+    console.log(
+      `${cyan("[*]")} github: https://github.com/parallel-news/permacast-cli`
+    );
+    console.log(`${cyan("[*]")} Twitter: @permacastapp \n\n`);
+  });
 }

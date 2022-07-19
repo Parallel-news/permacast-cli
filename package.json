@@ -1,6 +1,6 @@
 {
   "name": "permacast-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "CLI for Permacast V3",
   "type": "module",
   "main": "./src/bin/permacast-cli.js",
@@ -26,7 +26,6 @@
   "dependencies": {
     "arweave": "^1.11.4",
     "arweave-fees.js": "^0.0.3",
-    "ascii-art": "^2.8.5",
     "axios": "^0.27.2",
     "buffer-to-arraybuffer": "^0.0.6",
     "chalk": "^5.0.1",

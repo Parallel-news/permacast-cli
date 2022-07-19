@@ -15,12 +15,17 @@ async function uploadEpisode(e, factory, userWallet) {
   const link = e.enclosure[0]["$"].url;
   const fileType = e.enclosure[0]["$"].type;
   const title = e.title[0];
+  const pubDate = e.pubDate[0];
+  const duration = e["itunes:duration"][0];
   const description = stripHtml(e.description[0]).result;
   const address = userWallet.address;
   const jwk = userWallet.pk;
   const cover = factory.object.cover;
 
-  logGreen(`\n\ndownloading a new episode: ${title}`);
+  logCyan(`\n\ndownloading a new episode...`);
+  logCyan(`--> title: ${title}`);
+  logCyan(`--> publication date: ${pubDate}`);
+  logCyan(`--> length: ${duration} h\n`);
   const data = await downloadEpisode(link);
 
   const tx = await arweave.createTransaction({ data: data }, jwk);

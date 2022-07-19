@@ -4,7 +4,7 @@ CLI library for uploading content to [Permacast](https://permacast.dev).
 
 ## Install
 ```console
-npm install permacast-cli
+npm install -g permacast-cli
 ```
 
 ## Commands

@@ -6,6 +6,7 @@ import { initer } from "./initer.js";
 import { saveKeyFile, deleteKeyfile } from "./handlers/keyfile.js";
 import { importRss } from "./handlers/rss-import.js";
 import { account } from "./handlers/account.js";
+import { switchGateway } from "./handlers/gateways.js";
 
 const argvs = yargs(hideBin(process.argv))
   .command({
@@ -56,6 +57,22 @@ const argvs = yargs(hideBin(process.argv))
     handler: async (argv) => {
       await initer();
       await importRss(argv);
+    },
+  })
+  .command({
+    command: "change-gateway",
+    builder: (yargs) => {
+      yargs.options({
+        gateway: {
+          describe:
+            "gateway key ['arweave.net' or 'arweave.dev' or 'arweave.live']",
+          demandOption: true,
+        },
+      });
+    },
+    handler: async (argv) => {
+      await initer();
+      await switchGateway(argv);
     },
   })
   .help().argv;

@@ -4,7 +4,7 @@ import bufferToArrayBuffer from "buffer-to-arraybuffer";
 import * as fs from "fs";
 import { stripHtml } from "string-strip-html";
 import { getPodcastFactory } from "../../utils/permacast-api.js";
-import { arweave, sleepBlockCount } from "../../utils/arweave.js";
+import { arweaveConfig, sleepBlockCount } from "../../utils/arweave.js";
 import { NFT_ADDRESS, PERMACAST_API_ENDPOINT } from "../../utils/constants.js";
 import { logGreen, logRed, logCyan } from "../../utils/colors.js";
 import { getConfig, hasSavedKeyfile } from "../../utils/config.js";
@@ -26,6 +26,7 @@ async function uploadEpisode(e, factory, userWallet) {
   logCyan(`--> title: ${title}`);
   logCyan(`--> publication date: ${pubDate}`);
   logCyan(`--> length: ${duration} h\n`);
+  const arweave = await arweaveConfig();
   const data = await downloadEpisode(link);
 
   const tx = await arweave.createTransaction({ data: data }, jwk);

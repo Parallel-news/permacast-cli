@@ -47,5 +47,13 @@ This command displays your Arweave wallet address, balance, and how many megabyt
 permacast account
 ```
 
+### 5- Change Arweave gateway
+
+This command allows you to switch between Arweave stable mainnet gateways (arweave.net/dev/live)
+
+```console
+permacast change-gateway --gateway YOUR_OPTION
+```
+
 ## License
 This project is licensed under the [MIT license](./LICENSE).

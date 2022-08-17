@@ -1,6 +1,10 @@
 import Arweave from "arweave";
 import { logCyan } from "./colors.js";
-export const arweave = Arweave.init({
+import { getCurrentGateway } from "../bin/handlers/gateways.js";
+import { TPWT_CONTRACT_ADDRESS } from "./constants.js";
+
+
+const arweaveFallback = Arweave.init({
   host: "arweave.net",
   protocol: "https",
   port: 443,
@@ -8,8 +12,25 @@ export const arweave = Arweave.init({
   logging: false,
 });
 
+export async function arweaveConfig() {
+  try {
+    const gateway = await getCurrentGateway();
+    return Arweave.init({
+      host: gateway,
+      protocol: "https",
+      port: 443,
+      timeout: 60000,
+      logging: false,
+    });
+  } catch (error) {
+    return arweaveFallback;
+  }
+}
+
+
 export async function getAddrFromKeyfile(jwk) {
   try {
+    const arweave = await arweaveConfig();
     const address = await arweave.wallets.ownerToAddress(jwk?.n);
     if (address) {
       return address;
@@ -36,4 +57,15 @@ export async function sleepBlockCount(count) {
     } minutes)\n\n`
   );
   return new Promise((resolve) => setTimeout(resolve, blocks * 2 * 60 * 1000));
+}
+
+export async function getArBalance(address) {
+  try {
+    const arweave = await arweaveConfig();
+    const balance = await arweave.wallets.getBalance(address);
+    const arBalance = await arweave.ar.winstonToAr(balance);
+    return parseFloat(arBalance).toFixed(2);
+  } catch(error) {
+    return 0;
+  }
 }

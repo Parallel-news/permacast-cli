@@ -75,4 +75,10 @@ const argvs = yargs(hideBin(process.argv))
       await switchGateway(argv);
     },
   })
+  .command({
+    command: "*",
+    handler: async (argv) => {
+      await initer();
+    },
+  })
   .help().argv;

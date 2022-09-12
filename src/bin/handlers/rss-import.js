@@ -75,7 +75,8 @@ async function addShowtoState(name, desc, audio, factory, jwk) {
     "Content-Type": "text/plain",
     Input: JSON.stringify(input),
   };
-
+  
+  const arweave = await arweaveConfig();
   const interaction = await arweave.createTransaction({ data: desc });
   for (const key in tags) {
     interaction.addTag(key, tags[key]);

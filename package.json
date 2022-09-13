@@ -1,6 +1,6 @@
 {
   "name": "permacast-cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "CLI for Permacast V3",
   "type": "module",
   "main": "./src/bin/permacast-cli.js",

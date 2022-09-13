@@ -25,7 +25,7 @@ async function uploadEpisode(e, factory, userWallet) {
   logCyan(`\n\ndownloading a new episode...`);
   logCyan(`--> title: ${title}`);
   logCyan(`--> publication date: ${pubDate}`);
-  logCyan(`--> length: ${duration} h\n`);
+  logCyan(`--> length: ${duration} h/min/sec\n`);
   const arweave = await arweaveConfig();
   const data = await downloadEpisode(link);
 
@@ -112,7 +112,7 @@ export async function importRss(argv) {
 
   const existingTitles = await parseTitles(factory.object.episodes);
 
-  for (const e of rssEpisodes) {
+  for (const e of rssEpisodes.reverse()) {
     if (!existingTitles.includes(e.title[0])) {
       await uploadEpisode(e, factory, userWallet);
       await sleepBlockCount(3);

@@ -3,6 +3,7 @@ import parseString from "xml2js";
 import bufferToArrayBuffer from "buffer-to-arraybuffer";
 import * as fs from "fs";
 import { stripHtml } from "string-strip-html";
+import { CliUx } from "@oclif/core";
 import { getPodcastFactory } from "../../utils/permacast-api.js";
 import { arweaveConfig, sleepBlockCount } from "../../utils/arweave.js";
 import { NFT_ADDRESS, PERMACAST_API_ENDPOINT } from "../../utils/constants.js";
@@ -21,11 +22,12 @@ async function uploadEpisode(e, factory, userWallet) {
   const address = userWallet.address;
   const jwk = userWallet.pk;
   const cover = factory.object.cover;
-
-  logCyan(`\n\ndownloading a new episode...`);
+  
   logCyan(`--> title: ${title}`);
   logCyan(`--> publication date: ${pubDate}`);
   logCyan(`--> length: ${duration} h/min/sec\n`);
+  CliUx.ux.action.start('downloading a new episode');
+  console.log(`\n\n`)
   const arweave = await arweaveConfig();
   const data = await downloadEpisode(link);
 
@@ -53,6 +55,7 @@ async function uploadEpisode(e, factory, userWallet) {
     //   `${uploader.pctComplete}% complete, ${uploader.uploadedChunks}/${uploader.totalChunks}`
     // );
   }
+  CliUx.ux.action.stop()
   logGreen(`--SUCCESS - EPISODE AUDIO TXID: ${tx.id}`);
 
   await addShowtoState(title, description, tx.id, factory, jwk);

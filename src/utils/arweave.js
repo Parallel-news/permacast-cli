@@ -1,4 +1,5 @@
 import Arweave from "arweave";
+import { readContract } from "smartweave";
 import { logCyan } from "./colors.js";
 import { getCurrentGateway } from "../bin/handlers/gateways.js";
 import { TPWT_CONTRACT_ADDRESS } from "./constants.js";
@@ -59,6 +60,10 @@ export async function sleepBlockCount(count) {
   return new Promise((resolve) => setTimeout(resolve, blocks * 2 * 60 * 1000));
 }
 
+export async function sleep(ms) {
+return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export async function getArBalance(address) {
   try {
     const arweave = await arweaveConfig();
@@ -67,5 +72,20 @@ export async function getArBalance(address) {
     return parseFloat(arBalance).toFixed(2);
   } catch(error) {
     return 0;
+  }
+}
+
+export async function evaluateFactory(contract_id, pid) {
+  try {
+    const arweave = await arweaveConfig();
+    const state = await readContract(arweave, contract_id);
+
+    if (state) {
+      return state.podcasts.find((podcast) => podcast["pid"] === pid);
+    }
+
+    return { episodes: [] };
+  } catch (error) {
+    return { episodes: [] };
   }
 }

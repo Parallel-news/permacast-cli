@@ -28,7 +28,7 @@ permacast delete-keyfile
 Use this command to import your podcast's content from a valid RSS endpoint to your podcast over Permacast
 
 ```console
-permacast import-rss --pid YOUR_PODCAST_ID --rss-url THE_RSS_URL
+permacast import-rss --pid YOUR_PODCAST_ID --rss-url THE_RSS_URL --onchain-eval
 ```
 
 #### Example:
@@ -38,6 +38,8 @@ permacast import-rss --pid IKsjaUBJiKNDtLPIOyobkUM6iPtTKAK2bMDBu30KdmE --rss-url
 ```
 
 To know how to retrieve your `pid` (podcast ID) from the Permacast FE, check this [image](https://github.com/Parallel-news/permacast-docs/blob/main/img/fid-pid.png).
+
+***N.B: `--onchain-eval`  is an optional argument that if passed, it evaluates the podcast's factory contract from Arweave (slow to very slow) instead of fetching the factory's state from Permacast cache.***
 
 ### 4- View account stats
 

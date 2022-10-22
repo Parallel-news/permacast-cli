@@ -1,7 +1,7 @@
 import axios from "axios";
 import { PERMACAST_API_ENDPOINT } from "./constants.js";
 import { logRed } from "./colors.js";
-import { checkArAddr } from "./arweave.js";
+import { checkArAddr, evaluateFactory } from "./arweave.js";
 
 export async function getPermacastState() {
   try {
@@ -12,7 +12,7 @@ export async function getPermacastState() {
   }
 }
 
-export async function getPodcastFactory(pid, address) {
+export async function getPodcastFactory(pid, address, onchainEval) {
   const isValidPid = await checkArAddr(pid);
   if (!isValidPid) {
     logRed(`ERROR: the given PID (${pid}) has an invalid syntax`);
@@ -42,8 +42,12 @@ export async function getPodcastFactory(pid, address) {
     process.exit(1);
   }
 
+  const factoryState = onchainEval
+    ? await evaluateFactory(factoryAddress, pid)
+    : podcastFactory;
+
   return {
     address: factoryAddress,
-    object: podcastFactory,
+    object: factoryState,
   };
 }

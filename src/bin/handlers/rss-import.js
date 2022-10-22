@@ -99,10 +99,11 @@ export async function importRss(argv) {
   let rssJson;
   const RSS_URL = argv.rssUrl;
   const pid = argv.pid;
+  const onchain_eval = argv.onchainEval;
 
   await isValidUrl(RSS_URL);
   const userWallet = await getJwk();
-  const factory = await getPodcastFactory(pid, userWallet.address);
+  const factory = await getPodcastFactory(pid, userWallet.address, onchain_eval);
 
   const rssXml = (await axios.get(RSS_URL)).data;
   const json = parseString.parseString(

@@ -40,7 +40,7 @@ const argvs = yargs(hideBin(process.argv))
     },
   })
   .command({
-    command: "import-rss [pid] [rss-url]",
+    command: "import-rss [pid] [rss-url] [onchain-eval]",
     builder: (yargs) => {
       yargs.options({
         pid: {
@@ -51,6 +51,11 @@ const argvs = yargs(hideBin(process.argv))
           describe:
             "the URL address of the RSS of the podcast that you want to import its content to Permacast",
           demandOption: true,
+        },
+        "onchain-eval": {
+          describe:
+            "optional argument that if set to true, evaluates the podcast's factory from Arweave directly (slow to very slow)",
+          demandOption: false,
         },
       });
     },

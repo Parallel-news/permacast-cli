@@ -1,6 +1,6 @@
 {
   "name": "permacast-cli",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "CLI for Permacast V3",
   "type": "module",
   "main": "./src/bin/permacast-cli.js",
@@ -38,6 +38,7 @@
     "fs": "^0.0.1-security",
     "inquirer": "^9.0.1",
     "redstone-smartweave": "^0.4.4",
+    "smartweave": "^0.4.49",
     "string-strip-html": "^11.0.0",
     "xml2js": "^0.4.23",
     "yargs": "^17.5.1"
